@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For Megha 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0d0a06;
+    font-family: 'Instrument Sans', sans-serif;
+    color: #f5ede0;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bg-layer {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  }
+
+  .stars {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(255,220,160,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 10%, rgba(255,200,140,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 80% 50%, rgba(255,230,180,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 70%, rgba(255,210,150,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 80%, rgba(255,220,160,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 10% 85%, rgba(255,200,140,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 50% 20%, rgba(255,230,180,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 60%, rgba(255,210,150,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 45%, rgba(255,220,160,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 25%, rgba(255,200,140,0.6) 0%, transparent 100%);
+    animation: twinkle 4s ease-in-out infinite alternate;
+  }
+  @keyframes twinkle {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
+  }
+
+  .petal {
+    position: fixed;
+    animation: fall linear infinite;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+  }
+  @keyframes fall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.5; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  .page {
+    position: fixed; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 2rem 1.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    pointer-events: none;
+    z-index: 10;
+    text-align: center;
+  }
+  .page.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+  .page.exit {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+
+  .page-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 5vw, 1.6rem);
+    line-height: 1.7;
+    color: #f5ede0;
+    max-width: 340px;
+  }
+  .page-text.italic { font-style: italic; color: #f9d98a; }
+  .page-text.big { font-size: clamp(1.4rem, 6vw, 2rem); font-weight: 600; }
+  .page-text.small {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: clamp(0.95rem, 4vw, 1.15rem);
+    color: #e8d5b8;
+    line-height: 1.8;
+  }
+
+  .flower-burst {
+    font-size: 3rem;
+    animation: bloom 1s ease forwards;
+  }
+  @keyframes bloom {
+    0% { transform: scale(0) rotate(-30deg); opacity: 0; }
+    60% { transform: scale(1.2) rotate(5deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+
+  .hearts-container {
+    position: fixed; inset: 0; pointer-events: none; z-index: 2;
+    display: none;
+  }
+  .hearts-container.active { display: block; }
+  .floating-heart {
+    position: absolute;
+    animation: floatUp 3s ease-in infinite;
+    font-size: 1.2rem;
+    opacity: 0;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 0.7; }
+    100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+  }
+
+  .nav-btn {
+    margin-top: 2.5rem;
+    padding: 0.75rem 2.5rem;
+    background: transparent;
+    border: 1.5px solid rgba(249,217,138,0.6);
+    color: #f9d98a;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.12em;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+  }
+  .nav-btn:hover { background: rgba(249,217,138,0.12); border-color: #f9d98a; }
+
+  .progress {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 6px;
+    z-index: 20;
+  }
+  .dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(249,217,138,0.25);
+    transition: all 0.3s;
+  }
+  .dot.active { background: #f9d98a; transform: scale(1.4); }
+
+  .page-num {
+    position: fixed;
+    top: 1.2rem; right: 1.5rem;
+    font-size: 0.75rem;
+    color: rgba(245,237,224,0.3);
+    font-family: 'Instrument Sans', sans-serif;
+    z-index: 20;
+    letter-spacing: 0.08em;
+  }
+
+  .kerala-deco {
+    display: flex; align-items: center; gap: 0.5rem;
+    justify-content: center;
+    opacity: 0.5;
+    margin: 0.6rem 0;
+    font-size: 0.8rem;
+    color: #c8a96e;
+    letter-spacing: 0.15em;
+  }
+
+  @keyframes lotusOpen {
+    0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+  .lotus { animation: lotusOpen 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+  .shimmer-text {
+    background: linear-gradient(90deg, #f9d98a 0%, #fff8e7 40%, #f9d98a 60%, #e8a860 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s linear infinite;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 30px rgba(249,217,138,0.4), 0 0 60px rgba(249,100,100,0.2);
+  }
+
+  .ripple {
+    position: fixed;
+    border-radius: 50%;
+    border: 2px solid rgba(249,217,138,0.4);
+    animation: rippleOut 0.8s ease-out forwards;
+    pointer-events: none;
+    z-index: 5;
+  }
+  @keyframes rippleOut {
+    0% { width: 0; height: 0; opacity: 1; }
+    100% { width: 120px; height: 120px; margin-left: -60px; margin-top: -60px; opacity: 0; }
+  }
+
+  .wait-dots span {
+    display: inline-block;
+    animation: dotBounce 1.2s ease-in-out infinite;
+    font-size: 2rem;
+  }
+  .wait-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .wait-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes dotBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.4; }
+    50% { transform: translateY(-8px); opacity: 1; }
+  }
+
+  .bday {
+    font-size: 3rem;
+    animation: bounce 1s ease-in-out infinite alternate;
+  }
+  @keyframes bounce {
+    from { transform: translateY(0); }
+    to { transform: translateY(-10px); }
+  }
+
+  .envelope {
+    font-size: 4rem;
+    animation: wobble 2s ease-in-out infinite;
+  }
+  @keyframes wobble {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-layer"><div class="stars"></div></div>
+<div id="petals"></div>
+<div class="hearts-container" id="hearts"></div>
+<div class="page-num" id="pageNum">1 / 26</div>
+<div class="progress" id="progress"></div>
+
+<!-- P1 -->
+<div class="page active" data-pg="1">
+  <div class="kerala-deco">✦ &nbsp;&nbsp;&nbsp; ✦ &nbsp;&nbsp;&nbsp; ✦</div>
+  <p class="page-text italic">"Edi njan korach naalayi paryaanonn vicharich irunneya..."</p>
+  <div class="kerala-deco">✦ &nbsp;&nbsp;&nbsp; ✦ &nbsp;&nbsp;&nbsp; ✦</div>
+  <button class="nav-btn" onclick="nextPage()">തുടരുക →</button>
+</div>
+
+<!-- P2 -->
+<div class="page" data-pg="2">
+  <p class="page-text small">I already know that you have an idea of what I have to say.</p>
+  <div style="margin: 1rem 0; opacity: 0.4; font-size: 1.5rem;">• • •</div>
+  <button class="nav-btn" onclick="nextPage()">തുടരുക →</button>
+</div>
+
+<!-- P3 -->
+<div class="page" data-pg="3">
+  <p class="page-text italic">"Ninne phone vilicha kittathond pinne ingane cheyythe..."</p>
+  <div class="kerala-deco" style="margin-top: 1rem;">— — —</div>
+  <button class="nav-btn" onclick="nextPage()">തുടരുക →</button>
+</div>
+
+<!-- P4 -->
+<div class="page" data-pg="4">
+  <p class="page-text small" style="font-size: 1.1rem; letter-spacing: 0.05em;">The thing is...</p>
+  <div class="wait-dots" style="margin: 1.5rem 0;">
+    <span>.</span><span>.</span><span>.</span>
+  </div>
+  <button class="nav-btn" onclick="nextPage()">കാണട്ടെ →</button>
+</div>
+
+<!-- P5 — I LOVE YOU -->
+<div class="page" data-pg="5">
+  <div class="lotus flower-burst">🌸</div>
+  <div style="margin: 0.5rem 0 1.2rem;">
+    <svg width="220" height="16" viewBox="0 0 220 16">
+      <path d="M0 8 Q27 0 55 8 Q82 16 110 8 Q137 0 165 8 Q192 16 220 8" fill="none" stroke="#c8a96e" stroke-width="1.5" opacity="0.6"/>
+    </svg>
+  </div>
+  <p class="page-text big glow-text shimmer-text">Enikk ninne bhayangara ishttava 💛</p>
+  <div style="margin: 1rem 0;">
+    <svg width="220" height="16" viewBox="0 0 220 16">
+      <path d="M0 8 Q27 16 55 8 Q82 0 110 8 Q137 16 165 8 Q192 0 220 8" fill="none" stroke="#c8a96e" stroke-width="1.5" opacity="0.6"/>
+    </svg>
+  </div>
+  <div style="margin-top: 0.5rem; font-size: 1.4rem; animation: bloom 1.5s ease forwards;">🌺 🌼 🌸</div>
+  <button class="nav-btn" onclick="nextPage()" style="margin-top: 2rem;">ഒരു നിമിഷം... →</button>
+</div>
+
+<!-- P6 -->
+<div class="page" data-pg="6">
+  <p class="page-text small">Wait wait... Don't go yet...</p>
+  <div style="margin: 1.2rem 0; font-size: 1.8rem;">🙏</div>
+  <p class="page-text italic">"I already know how you're feeling about this."</p>
+  <button class="nav-btn" onclick="nextPage()">പക്ഷേ... →</button>
+</div>
+
+<!-- P7 -->
+<div class="page" data-pg="7">
+  <p class="page-text small">but I reallyyy neeed to say this...</p>
+  <div style="margin: 1.2rem 0; opacity: 0.5;">
+    <svg width="60" height="40" viewBox="0 0 60 40">
+      <path d="M30 5 Q45 15 30 35 Q15 15 30 5Z" fill="#e8536a" opacity="0.7"/>
+    </svg>
+  </div>
+  <p class="page-text italic">"That's why..."</p>
+  <button class="nav-btn" onclick="nextPage()">കേൾക്കൂ →</button>
+</div>
+
+<!-- P8 -->
+<div class="page" data-pg="8">
+  <p class="page-text small" style="line-height: 2;">
+    I made a lot of mistakes.<br/>
+    I made a lot of fucked up choices.<br/>
+    A looot of personal problems.
+  </p>
+  <div class="kerala-deco" style="margin-top: 1.2rem;">~ ~ ~</div>
+  <button class="nav-btn" onclick="nextPage()">അതൊക്കെ... →</button>
+</div>
+
+<!-- P9 -->
+<div class="page" data-pg="9">
+  <p class="page-text italic">"Athinte okke edel ninnod thurann parayan ulla gap kittila..."</p>
+  <div style="margin: 1.2rem 0; font-size: 1.2rem; opacity: 0.5;">— — —</div>
+  <button class="nav-btn" onclick="nextPage()">പക്ഷേ ഒന്ന് →</button>
+</div>
+
+<!-- P10 -->
+<div class="page" data-pg="10">
+  <p class="page-text small">Well njan ippo ente svantham life kootti muttikkan ulla oottathila.</p>
+  <button class="nav-btn" onclick="nextPage()">കേൾക്കൂ →</button>
+</div>
+
+<!-- P11 -->
+<div class="page" data-pg="11">
+  <div style="font-size: 2rem; margin-bottom: 1rem;">🌟</div>
+  <p class="page-text small">Ennelm nalla joli kitti rekshapedum enn nalla orapp ind.</p>
+  <button class="nav-btn" onclick="nextPage()">So... →</button>
+</div>
+
+<!-- P12 -->
+<div class="page" data-pg="12">
+  <p class="page-text small" style="line-height: 2.1;">
+    Sooo what I'm saying is...<br/>
+    <span style="color: #f9d98a;">I won't push you.</span><br/>
+    <span style="color: #f9d98a;">I won't shalyam cheyyal you.</span><br/>
+    Butttt...
+  </p>
+  <button class="nav-btn" onclick="nextPage()">→</button>
+</div>
+
+<!-- P13 -->
+<div class="page" data-pg="13">
+  <div style="margin-bottom: 1rem;">
+    <svg width="200" height="60" viewBox="0 0 200 60">
+      <rect x="85" y="30" width="30" height="25" fill="#c8a96e" opacity="0.3"/>
+      <polygon points="100,5 70,30 130,30" fill="#c8a96e" opacity="0.3"/>
+      <polygon points="100,12 80,30 120,30" fill="#c8a96e" opacity="0.2"/>
+      <rect x="20" y="40" width="50" height="15" fill="#c8a96e" opacity="0.15"/>
+      <rect x="130" y="40" width="50" height="15" fill="#c8a96e" opacity="0.15"/>
+    </svg>
+  </div>
+  <p class="page-text small" style="line-height: 2;">
+    Njan oru gov job medich<br/>svantham kaalil nikkaraya. 💪<br/><br/>
+    Nee ninte dreams and goals okke<br/>set aayi svantham kaali nikkaraya. 🌟
+  </p>
+  <button class="nav-btn" onclick="nextPage()">Ann... →</button>
+</div>
+
+<!-- P14 — PROPOSAL -->
+<div class="page" data-pg="14">
+  <div style="font-size: 3.5rem; animation: bloom 0.8s ease forwards;">💍</div>
+  <div style="margin: 1rem 0;">
+    <svg width="200" height="20" viewBox="0 0 200 20">
+      <path d="M10 10 L190 10" stroke="#c8a96e" stroke-width="0.5" opacity="0.4"/>
+      <circle cx="100" cy="10" r="4" fill="none" stroke="#c8a96e" opacity="0.6"/>
+      <circle cx="60" cy="10" r="2" fill="#c8a96e" opacity="0.4"/>
+      <circle cx="140" cy="10" r="2" fill="#c8a96e" opacity="0.4"/>
+    </svg>
+  </div>
+  <p class="page-text italic" style="color: #f9d98a; font-size: 1.4rem;">Ann ninakk okee aanengil...</p>
+  <p class="page-text small" style="margin-top: 0.8rem; opacity: 0.7; font-size: 0.9rem;">( If you're okay with all of this... )</p>
+  <button class="nav-btn" onclick="nextPage()">തുടരൂ →</button>
+</div>
+
+<!-- P15 -->
+<div class="page" data-pg="15">
+  <div style="font-size: 2rem; margin-bottom: 1rem;">🏠</div>
+  <p class="page-text small">Ninte veetkarkkum ok aanengi...</p>
+  <div class="kerala-deco" style="margin: 0.8rem 0;">✦ &nbsp; ✦ &nbsp; ✦</div>
+  <button class="nav-btn" onclick="nextPage()">→</button>
+</div>
+
+<!-- P16 — CHERISH HER -->
+<div class="page" data-pg="16">
+  <div style="font-size: 3rem; margin-bottom: 0.8rem; animation: bloom 1s ease forwards;">🥹</div>
+  <p class="page-text big shimmer-text">Ente veetikarde ok yum medich ninne ponn pole nokkikola...</p>
+  <div style="margin: 1rem 0; display: flex; gap: 0.5rem; justify-content: center; font-size: 1.5rem;">
+    <span style="animation: bloom 0.5s 0.2s ease both;">💛</span>
+    <span style="animation: bloom 0.5s 0.4s ease both;">🌸</span>
+    <span style="animation: bloom 0.5s 0.6s ease both;">💛</span>
+  </div>
+  <button class="nav-btn" onclick="nextPage()">→</button>
+</div>
+
+<!-- P17 -->
+<div class="page" data-pg="17">
+  <p class="page-text small" style="line-height: 2;">I know you have a lot of dreams and hopes...</p>
+  <div style="font-size: 2rem; margin: 1rem 0;">🌠</div>
+  <button class="nav-btn" onclick="nextPage()">→</button>
+</div>
+
+<!-- P18 -->
+<div class="page" data-pg="18">
+  <div style="font-size: 2.5rem; margin-bottom: 1rem;">🤝</div>
+  <p class="page-text small">And I'm happy to support you however I can.</p>
+  <button class="nav-btn" onclick="nextPage()">→</button>
+</div>
+
+<!-- P19 -->
+<div class="page" data-pg="19">
+  <p class="page-text italic">"I just wanted to share these feelings."</p>
+  <div class="kerala-deco" style="margin-top: 1.2rem;">— — —</div>
+  <button class="nav-btn" onclick="nextPage()">→</button>
+</div>
+
+<!-- P20 -->
+<div class="page" data-pg="20">
+  <p class="page-text small" style="line-height: 2.1;">
+    Ithilum sincerely paryaan...<br/>
+    <span style="color: #f9d98a; font-style: italic;">I don't know.</span>
+  </p>
+  <button class="nav-btn" onclick="nextPage()">Soo... →</button>
+</div>
+
+<!-- P21 -->
+<div class="page" data-pg="21">
+  <p class="page-text big" style="color: #f9d98a;">Sooo...</p>
+  <div style="margin: 1rem 0; font-size: 1.1rem; color: #e8d5b8; font-family: 'Instrument Sans', sans-serif;">
+    It's your choice. 🙏
+  </div>
+  <button class="nav-btn" onclick="nextPage()">→</button>
+</div>
+
+<!-- P22 -->
+<div class="page" data-pg="22">
+  <div style="font-size: 2rem; margin-bottom: 1rem;">💬</div>
+  <p class="page-text small">WhatsApp il ingane ezthi idan oru madi...</p>
+  <button class="nav-btn" onclick="nextPage()">So... →</button>
+</div>
+
+<!-- P23 -->
+<div class="page" data-pg="23">
+  <div class="envelope">🌐</div>
+  <div style="margin: 1rem 0;"></div>
+  <p class="page-text small">Sooo that's why I made a website to let you know how much I like you... 😁</p>
+  <button class="nav-btn" onclick="nextPage()">→</button>
+</div>
+
+<!-- P24 -->
+<div class="page" data-pg="24">
+  <p class="page-text italic">"Sooo annayi aaloich paranja mathi..."</p>
+  <div style="margin: 1.2rem 0; font-size: 1.5rem;">🌙</div>
+  <p class="page-text small">Don't make a decision now.</p>
+  <button class="nav-btn" onclick="nextPage()">→</button>
+</div>
+
+<!-- P25 -->
+<div class="page" data-pg="25">
+  <div style="font-size: 2rem; margin-bottom: 1rem;">📞</div>
+  <p class="page-text small">If you can please call back whenever you are free...</p>
+  <div class="kerala-deco" style="margin: 1rem 0;">✦ &nbsp; ✦ &nbsp; ✦</div>
+  <button class="nav-btn" onclick="nextPage()">ഒരു കാര്യം കൂടി... →</button>
+</div>
+
+<!-- P26 — FINAL -->
+<div class="page" data-pg="26">
+  <div style="margin-bottom: 0.5rem;">
+    <svg width="200" height="50" viewBox="0 0 200 50">
+      <circle cx="100" cy="25" r="20" fill="none" stroke="#c8a96e" stroke-width="0.8" opacity="0.5"/>
+      <circle cx="100" cy="25" r="12" fill="none" stroke="#c8a96e" stroke-width="0.5" opacity="0.4"/>
+      <line x1="80" y1="25" x2="120" y2="25" stroke="#c8a96e" stroke-width="0.5" opacity="0.4"/>
+      <line x1="100" y1="5" x2="100" y2="45" stroke="#c8a96e" stroke-width="0.5" opacity="0.4"/>
+      <circle cx="100" cy="25" r="3" fill="#c8a96e" opacity="0.7"/>
+    </svg>
+  </div>
+  <p class="page-text small" style="font-size: 1.2rem; line-height: 2;">Bei... 👋</p>
+  <div class="bday" style="margin: 0.5rem 0;">🎂</div>
+  <p class="page-text big shimmer-text" style="font-size: 1.6rem;">Happy Birthday Megha!! 🥳</p>
+  <div style="margin-top: 1rem; font-size: 1.3rem; animation: bloom 1s 0.5s ease both; opacity: 0;">
+    🌸 🎉 💛 🎉 🌸
+  </div>
+</div>
+
+<script>
+let currentPage = 0;
+const pages = document.querySelectorAll('.page');
+const totalPages = pages.length;
+const progressEl = document.getElementById('progress');
+const pageNumEl = document.getElementById('pageNum');
+
+for (let i = 0; i < totalPages; i++) {
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (i === 0 ? ' active' : '');
+  progressEl.appendChild(dot);
+}
+
+const petalEmojis = ['🌸', '🌼', '🌺', '🍀', '✿'];
+const petalsContainer = document.getElementById('petals');
+for (let i = 0; i < 12; i++) {
+  const petal = document.createElement('div');
+  petal.className = 'petal';
+  petal.textContent = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+  petal.style.left = Math.random() * 100 + 'vw';
+  petal.style.animationDuration = (6 + Math.random() * 8) + 's';
+  petal.style.animationDelay = (Math.random() * 8) + 's';
+  petal.style.fontSize = (12 + Math.random() * 10) + 'px';
+  petalsContainer.appendChild(petal);
+}
+
+const heartsContainer = document.getElementById('hearts');
+function startHearts() {
+  heartsContainer.classList.add('active');
+  heartsContainer.innerHTML = '';
+  for (let i = 0; i < 15; i++) {
+    const h = document.createElement('div');
+    h.className = 'floating-heart';
+    h.textContent = ['💛', '🌸', '❤️', '💕', '✨'][Math.floor(Math.random() * 5)];
+    h.style.left = Math.random() * 100 + 'vw';
+    h.style.animationDuration = (2 + Math.random() * 2) + 's';
+    h.style.animationDelay = (Math.random() * 2) + 's';
+    heartsContainer.appendChild(h);
+  }
+}
+function stopHearts() { heartsContainer.classList.remove('active'); }
+
+const heartPages = [5, 14, 16, 26];
+
+function nextPage() {
+  if (currentPage >= totalPages - 1) return;
+  pages[currentPage].classList.remove('active');
+  pages[currentPage].classList.add('exit');
+  setTimeout(() => pages[currentPage].classList.remove('exit'), 800);
+  currentPage++;
+  pages[currentPage].classList.add('active');
+  document.querySelectorAll('.dot').forEach((d, i) => {
+    d.classList.toggle('active', i === currentPage);
+  });
+  pageNumEl.textContent = (currentPage + 1) + ' / ' + totalPages;
+  const pg = parseInt(pages[currentPage].dataset.pg);
+  if (heartPages.includes(pg)) {
+    startHearts();
+    setTimeout(stopHearts, 5000);
+  }
+}
+
+document.addEventListener('click', (e) => {
+  const ripple = document.createElement('div');
+  ripple.className = 'ripple';
+  ripple.style.left = e.clientX + 'px';
+  ripple.style.top = e.clientY + 'px';
+  document.body.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 800);
+});
+</script>
+</body>
+</html>
